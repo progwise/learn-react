@@ -10,6 +10,7 @@
   "license": "ISC",
   "workspaces": [
     "frontend",
-    "backend"
+    "backend",
+    "slides"
   ]
 }
