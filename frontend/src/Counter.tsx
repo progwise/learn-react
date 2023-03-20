@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { CounterButtons } from "./CounterButtons";
 
 interface CounterProps {
   steps?: number;
@@ -19,30 +20,22 @@ export const Counter = ({
     <div>
       {value}
 
-      <div>
-        <button
-          onClick={() => {
-            const newValue = value + steps;
+      <CounterButtons
+        onIncrement={() => {
+          const newValue = value + steps;
 
-            if (newValue <= max) {
-              setValue(value + steps);
-            }
-          }}
-        >
-          increment
-        </button>
-        <button
-          onClick={() => {
-            const newValue = value - steps;
+          if (newValue <= max) {
+            setValue(value + steps);
+          }
+        }}
+        onDecrement={() => {
+          const newValue = value - steps;
 
-            if (newValue >= min) {
-              setValue(newValue);
-            }
-          }}
-        >
-          decrement
-        </button>
-      </div>
+          if (newValue >= min) {
+            setValue(newValue);
+          }
+        }}
+      />
     </div>
   );
 };
