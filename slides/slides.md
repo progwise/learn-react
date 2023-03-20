@@ -214,15 +214,26 @@ export const Greeting = ({ name = "World" }: GreetingProps) => {
 
 ---
 
+# Listen
+
+- Arrays können mit der `.map()` Method in HTML Tags umgewandelt werden
+- jeder Eintrag **muss** einen eindeutigen Key haben (Performance)
+
+```tsx
+<ul>
+  {techStack.map((technology) => {
+    return <li key={technology}>{technology}</li>;
+  })}
+</ul>
+```
+
+---
+
 # Event Handling
 
 ---
 
 # State
-
----
-
-# render lists
 
 ---
 
