@@ -235,6 +235,17 @@ export const Greeting = ({ name = "World" }: GreetingProps) => {
 
 # State
 
+Mit dem `useState` Hook können einzelne States innerhalb von Komponenten erzeugt werden.
+
+```tsx
+const [value, setValue] = useState(0);
+```
+
+- `useState` gibt den aktuellen Wert und eine Setter Funktion als Array zurück
+- mit dem Argument wird der initiale Wert definiert
+- der State kann nur mit dem Setter verändert werden: `setValue(1)`
+- jeder "State Change" erzeugt ein Rerendering der Komponente
+
 ---
 
 # `useEffect`
