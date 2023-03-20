@@ -1,4 +1,10 @@
 import { FormEvent, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+
+interface CreateFormState {
+  title: string;
+  description: string;
+}
 
 interface TodoItem {
   id: number;
@@ -7,8 +13,8 @@ interface TodoItem {
 }
 
 export const TodoApp = () => {
-  const inputTitleRef = useRef<HTMLInputElement>(null);
-  const inputDescriptionRef = useRef<HTMLInputElement>(null);
+  // const inputTitleRef = useRef<HTMLInputElement>(null);
+  // const inputDescriptionRef = useRef<HTMLInputElement>(null);
   const [todos, setTodos] = useState<TodoItem[]>([
     {
       id: Math.random(),
@@ -17,23 +23,28 @@ export const TodoApp = () => {
     },
     { id: Math.random(), title: "Clean up" },
   ]);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isSubmitting },
+  } = useForm<CreateFormState>();
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
+  const handleCreateSubmit = async (data: CreateFormState) => {
+    console.log(data);
 
-    const newTaskTitle = inputTitleRef.current?.value ?? "";
-    const newTaskDescription = inputDescriptionRef.current?.value;
-
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     const newTodos = [
       ...todos,
       {
         id: Math.random(),
-        title: newTaskTitle,
-        description: newTaskDescription,
+        title: data.title,
+        description: data.description,
       },
     ];
 
     setTodos(newTodos);
+    reset();
   };
 
   return (
@@ -47,10 +58,12 @@ export const TodoApp = () => {
           );
         })}
       </ul>
-      <form onSubmit={handleSubmit}>
-        <input ref={inputTitleRef} />
-        <input ref={inputDescriptionRef} />
-        <button type="submit">Create</button>
+      <form onSubmit={handleSubmit(handleCreateSubmit)}>
+        <input {...register("title")} disabled={isSubmitting} />
+        <input {...register("description")} disabled={isSubmitting} />
+        <button type="submit" disabled={isSubmitting}>
+          Create
+        </button>
       </form>
     </>
   );
