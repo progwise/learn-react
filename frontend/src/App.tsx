@@ -1,7 +1,12 @@
 import "./App.css";
+import { Greeting } from "./Greeting";
 
-function App() {
-  return <div>App</div>;
-}
+const App = () => {
+  return (
+    <div>
+      App <Greeting />
+    </div>
+  );
+};
 
 export default App;
