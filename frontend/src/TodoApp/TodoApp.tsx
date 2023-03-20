@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import { FormEvent, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -76,9 +77,9 @@ export const TodoApp = () => {
           <option value={Priority.Medium}>medium</option>
           <option value={Priority.Low}>low</option>
         </select>
-        <button type="submit" disabled={isSubmitting}>
+        <Button type="submit" variant="outlined" disabled={isSubmitting}>
           Create
-        </button>
+        </Button>
       </form>
     </>
   );
