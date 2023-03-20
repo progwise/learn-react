@@ -90,7 +90,7 @@ Welche Erfahrungen habt ihr mit:
 - Open Source Bibliothek
 - Entwickelt von Facebook
 - Erstellung interaktiver Benutzeroberflächen
-- Komponenten basierter Entwicklung
+- Komponenten basierte Entwicklung
 
 ---
 
