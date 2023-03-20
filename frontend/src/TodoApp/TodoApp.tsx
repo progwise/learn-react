@@ -21,10 +21,19 @@ export const TodoApp = () => {
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
 
-    const newTaskTitle = inputTitleRef.current?.value;
+    const newTaskTitle = inputTitleRef.current?.value ?? "";
     const newTaskDescription = inputDescriptionRef.current?.value;
 
-    alert("submitted: " + newTaskTitle + " " + newTaskDescription);
+    const newTodos = [
+      ...todos,
+      {
+        id: Math.random(),
+        title: newTaskTitle,
+        description: newTaskDescription,
+      },
+    ];
+
+    setTodos(newTodos);
   };
 
   return (
