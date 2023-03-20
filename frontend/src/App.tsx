@@ -11,7 +11,6 @@ const App = () => {
       <Greeting name="Cosmos Direct">
         <span>🎉</span>
       </Greeting>
-      <Greeting>Children</Greeting>
       <AboutMe
         name="Pascal"
         techStack={["TypeScript", "React"]}
