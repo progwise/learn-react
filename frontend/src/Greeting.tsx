@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 
 interface GreetingProps {
   name?: string;
@@ -13,6 +13,13 @@ export const Greeting = ({
   hasGreetedBack,
   onGreet,
 }: GreetingProps) => {
+  console.log("render");
+
+  useEffect(() => {
+    console.log("Hello from use effect");
+    document.title = hasGreetedBack ? "" : "Hello - please greet back";
+  }, [hasGreetedBack]);
+
   return (
     <div>
       <h1>Hello {name}!</h1>

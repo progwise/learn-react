@@ -21,13 +21,6 @@ const App = () => {
       >
         <span>🎉</span>
       </Greeting>
-      <Greeting
-        name="Cosmos Direct"
-        hasGreetedBack={hasGreetedBack}
-        onGreet={handleGreet}
-      >
-        <span>🎉</span>
-      </Greeting>
       <AboutMe
         name="Pascal"
         techStack={["TypeScript", "React"]}
