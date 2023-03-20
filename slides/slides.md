@@ -192,6 +192,26 @@ Live Demo in [Vite](https://vitejs.dev)
 
 # Props
 
+Ermöglichen:
+
+- Daten an die Komponente zu übergeben
+- Event Listener zu registrieren
+
+```tsx
+interface GreetingProps {
+  name?: string;
+}
+
+export const Greeting = ({ name = "World" }: GreetingProps) => {
+  return (
+    <div>
+      <h1>Hello {name}!</h1>
+      <p>Welcome to my App</p>
+    </div>
+  );
+};
+```
+
 ---
 
 # Event Handling
