@@ -12,7 +12,11 @@ const App = () => {
         <span>🎉</span>
       </Greeting>
       <Greeting>Children</Greeting>
-      <AboutMe name="Pascal" techStack={["TypeScript", "React"]} />
+      <AboutMe
+        name="Pascal"
+        techStack={["TypeScript", "React"]}
+        hobbies={["Sailing", "Coding"]}
+      />
     </div>
   );
 };
