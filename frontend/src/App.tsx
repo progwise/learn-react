@@ -8,8 +8,10 @@ const App = () => {
   return (
     <div>
       App
-      <Greeting name="Cosmos Direct" />
-      <Greeting />
+      <Greeting name="Cosmos Direct">
+        <span>🎉</span>
+      </Greeting>
+      <Greeting>Children</Greeting>
       <AboutMe name="Pascal" techStack={["TypeScript", "React"]} />
     </div>
   );
