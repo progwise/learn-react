@@ -1,8 +1,22 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
+
+interface TodoItem {
+  id: number;
+  title: string;
+  description?: string;
+}
 
 export const TodoApp = () => {
   const inputTitleRef = useRef<HTMLInputElement>(null);
   const inputDescriptionRef = useRef<HTMLInputElement>(null);
+  const [todos, setTodos] = useState<TodoItem[]>([
+    {
+      id: Math.random(),
+      title: "Buy groceries",
+      description: "Milk, Cheese,...",
+    },
+    { id: Math.random(), title: "Clean up" },
+  ]);
 
   const handleSubmit = () => {
     const newTaskTitle = inputTitleRef.current?.value;
@@ -14,8 +28,13 @@ export const TodoApp = () => {
   return (
     <>
       <ul>
-        <li>Buy groceries</li>
-        <li>Clean up</li>
+        {todos.map((todo) => {
+          return (
+            <li key={todo.id}>
+              {todo.title} {todo.description && ` - ${todo.description}`}
+            </li>
+          );
+        })}
       </ul>
       <form onSubmit={handleSubmit}>
         <input ref={inputTitleRef} />
