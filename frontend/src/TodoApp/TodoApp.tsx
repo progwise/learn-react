@@ -1,13 +1,14 @@
 import { useRef } from "react";
 
 export const TodoApp = () => {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputTitleRef = useRef<HTMLInputElement>(null);
+  const inputDescriptionRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = () => {
-    if (inputRef.current) {
-      const newTaskTitle = inputRef.current.value;
-      alert("submitted: " + newTaskTitle);
-    }
+    const newTaskTitle = inputTitleRef.current?.value;
+    const newTaskDescription = inputDescriptionRef.current?.value;
+
+    alert("submitted: " + newTaskTitle + " " + newTaskDescription);
   };
 
   return (
@@ -17,7 +18,8 @@ export const TodoApp = () => {
         <li>Clean up</li>
       </ul>
       <form onSubmit={handleSubmit}>
-        <input ref={inputRef} />
+        <input ref={inputTitleRef} />
+        <input ref={inputDescriptionRef} />
         <button type="submit">Create</button>
       </form>
     </>
