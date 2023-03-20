@@ -10,7 +10,7 @@ const App = () => {
       App
       <Greeting name="Cosmos Direct" />
       <Greeting />
-      <AboutMe />
+      <AboutMe name="Pascal" techStack={["TypeScript", "React"]} />
     </div>
   );
 };
