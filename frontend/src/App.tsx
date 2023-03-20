@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { AboutMe } from "./AboutMe";
 import "./App.css";
 import { Counter } from "./Counter";
@@ -6,10 +7,25 @@ import { Greeting } from "./Greeting";
 const COMPANY_NAME = "Cosmos Direct";
 
 const App = () => {
+  const [hasGreetedBack, setHasGreetedBack] = useState(false);
+
+  const handleGreet = () => setHasGreetedBack(true);
+
   return (
     <div>
       App
-      <Greeting name="Cosmos Direct">
+      <Greeting
+        name="Cosmos Direct"
+        hasGreetedBack={hasGreetedBack}
+        onGreet={handleGreet}
+      >
+        <span>🎉</span>
+      </Greeting>
+      <Greeting
+        name="Cosmos Direct"
+        hasGreetedBack={hasGreetedBack}
+        onGreet={handleGreet}
+      >
         <span>🎉</span>
       </Greeting>
       <AboutMe

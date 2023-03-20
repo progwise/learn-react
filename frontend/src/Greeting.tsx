@@ -1,16 +1,18 @@
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 
 interface GreetingProps {
   name?: string;
   children: ReactNode;
+  hasGreetedBack: boolean;
+  onGreet: () => void;
 }
 
-export const Greeting = ({ name = "World", children }: GreetingProps) => {
-  const [hasGreetedBack, setHasGreetedBack] = useState(false);
-  // optional logic
-
-  console.log({ hasGreetedBack });
-
+export const Greeting = ({
+  name = "World",
+  children,
+  hasGreetedBack,
+  onGreet,
+}: GreetingProps) => {
   return (
     <div>
       <h1>Hello {name}!</h1>
@@ -18,7 +20,7 @@ export const Greeting = ({ name = "World", children }: GreetingProps) => {
       {children}
       <br />
       {hasGreetedBack === false && (
-        <button onClick={() => setHasGreetedBack(true)}>Greet back</button>
+        <button onClick={onGreet}>Greet back</button>
       )}
       <hr />
     </div>
