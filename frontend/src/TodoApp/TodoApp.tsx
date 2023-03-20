@@ -1,6 +1,19 @@
-import { Button } from "@mui/material";
-import { FormEvent, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import { LowPriority, PriorityHigh } from "@mui/icons-material";
+import {
+  Button,
+  Checkbox,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  MenuItem,
+  Paper,
+  Select,
+  TextField,
+} from "@mui/material";
+import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 
 enum Priority {
   Low = "low",
@@ -21,8 +34,6 @@ interface TodoItem {
 }
 
 export const TodoApp = () => {
-  // const inputTitleRef = useRef<HTMLInputElement>(null);
-  // const inputDescriptionRef = useRef<HTMLInputElement>(null);
   const [todos, setTodos] = useState<TodoItem[]>([
     {
       id: Math.random(),
@@ -31,13 +42,17 @@ export const TodoApp = () => {
       priority: Priority.High,
     },
     { id: Math.random(), title: "Clean up", priority: Priority.Medium },
+    { id: Math.random(), title: "Do nothing", priority: Priority.Low },
   ]);
   const {
     register,
     handleSubmit,
     reset,
+    control,
     formState: { isSubmitting },
-  } = useForm<CreateFormState>();
+  } = useForm<CreateFormState>({
+    defaultValues: { priority: Priority.Medium },
+  });
 
   const handleCreateSubmit = async (data: CreateFormState) => {
     console.log(data);
@@ -59,27 +74,73 @@ export const TodoApp = () => {
 
   return (
     <>
-      <ul>
-        {todos.map((todo) => {
-          return (
-            <li key={todo.id}>
-              {todo.title} {todo.description && ` - ${todo.description}`} (
-              {todo.priority})
-            </li>
-          );
-        })}
-      </ul>
+      <Paper>
+        <List>
+          {todos.map((todo) => {
+            return (
+              <ListItem
+                key={todo.id}
+                disablePadding
+                secondaryAction={
+                  {
+                    [Priority.High]: <PriorityHigh />,
+                    [Priority.Medium]: "",
+                    [Priority.Low]: <LowPriority />,
+                  }[todo.priority]
+                }
+              >
+                <ListItemButton>
+                  <ListItemIcon>
+                    <Checkbox />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={todo.title}
+                    secondary={todo.description}
+                  />
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
+        </List>
+      </Paper>
+
+      <br />
       <form onSubmit={handleSubmit(handleCreateSubmit)}>
-        <input {...register("title")} disabled={isSubmitting} />
-        <input {...register("description")} disabled={isSubmitting} />
-        <select {...register("priority")}>
-          <option value={Priority.High}>high</option>
-          <option value={Priority.Medium}>medium</option>
-          <option value={Priority.Low}>low</option>
-        </select>
-        <Button type="submit" variant="outlined" disabled={isSubmitting}>
-          Create
-        </Button>
+        <TextField
+          {...register("title")}
+          label="Title"
+          disabled={isSubmitting}
+        />
+        <TextField
+          {...register("description")}
+          label="Description"
+          disabled={isSubmitting}
+        />
+
+        <Controller
+          render={({ field }) => (
+            <Select {...field} disabled={isSubmitting} label="Priority">
+              <MenuItem value={Priority.High}>high</MenuItem>
+              <MenuItem value={Priority.Medium}>medium</MenuItem>
+              <MenuItem value={Priority.Low}>low</MenuItem>
+            </Select>
+          )}
+          control={control}
+          name="priority"
+        />
+
+        <br />
+        <br />
+        <div>
+          <Button
+            type="submit"
+            variant="contained"
+            color="success"
+            disabled={isSubmitting}
+          >
+            Create
+          </Button>
+        </div>
       </form>
     </>
   );
