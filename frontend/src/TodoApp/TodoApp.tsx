@@ -1,15 +1,22 @@
 import { FormEvent, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
+enum Priority {
+  Low = "low",
+  Medium = "medium",
+  High = "high",
+}
 interface CreateFormState {
   title: string;
   description: string;
+  priority: Priority;
 }
 
 interface TodoItem {
   id: number;
   title: string;
   description?: string;
+  priority: Priority;
 }
 
 export const TodoApp = () => {
@@ -20,8 +27,9 @@ export const TodoApp = () => {
       id: Math.random(),
       title: "Buy groceries",
       description: "Milk, Cheese,...",
+      priority: Priority.High,
     },
-    { id: Math.random(), title: "Clean up" },
+    { id: Math.random(), title: "Clean up", priority: Priority.Medium },
   ]);
   const {
     register,
@@ -40,6 +48,7 @@ export const TodoApp = () => {
         id: Math.random(),
         title: data.title,
         description: data.description,
+        priority: data.priority,
       },
     ];
 
@@ -53,7 +62,8 @@ export const TodoApp = () => {
         {todos.map((todo) => {
           return (
             <li key={todo.id}>
-              {todo.title} {todo.description && ` - ${todo.description}`}
+              {todo.title} {todo.description && ` - ${todo.description}`} (
+              {todo.priority})
             </li>
           );
         })}
@@ -61,6 +71,11 @@ export const TodoApp = () => {
       <form onSubmit={handleSubmit(handleCreateSubmit)}>
         <input {...register("title")} disabled={isSubmitting} />
         <input {...register("description")} disabled={isSubmitting} />
+        <select {...register("priority")}>
+          <option value={Priority.High}>high</option>
+          <option value={Priority.Medium}>medium</option>
+          <option value={Priority.Low}>low</option>
+        </select>
         <button type="submit" disabled={isSubmitting}>
           Create
         </button>
