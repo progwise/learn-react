@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 
 interface TodoItem {
   id: number;
@@ -18,7 +18,9 @@ export const TodoApp = () => {
     { id: Math.random(), title: "Clean up" },
   ]);
 
-  const handleSubmit = () => {
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+
     const newTaskTitle = inputTitleRef.current?.value;
     const newTaskDescription = inputDescriptionRef.current?.value;
 
