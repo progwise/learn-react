@@ -1,5 +1,6 @@
 import { AboutMe } from "./AboutMe";
 import "./App.css";
+import { Counter } from "./Counter";
 import { Greeting } from "./Greeting";
 
 const COMPANY_NAME = "Cosmos Direct";
@@ -16,6 +17,7 @@ const App = () => {
         techStack={["TypeScript", "React"]}
         hobbies={["Sailing", "Coding"]}
       />
+      <Counter steps={10} start={100} min={100} max={150} />
     </div>
   );
 };
