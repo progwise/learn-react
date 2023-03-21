@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { CounterButtons } from "./CounterButtons";
+import { useCounter } from "./CounterContext";
 
 interface CounterProps {
   steps?: number;
@@ -14,7 +15,7 @@ export const Counter = ({
   min = -Infinity,
   max = Infinity,
 }: CounterProps) => {
-  const [value, setValue] = useState(start);
+  const { value, setValue } = useCounter();
 
   return (
     <div>
