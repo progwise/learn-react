@@ -32,6 +32,8 @@ app.put("/todos/:id", (req, res) => {
     res.sendStatus(404);
   } else {
     todo.title = todoItem.title;
+    todo.description = todoItem.description;
+    todo.priority = todoItem.priority;
     todo.done = todoItem.done;
     res.send(true);
   }
