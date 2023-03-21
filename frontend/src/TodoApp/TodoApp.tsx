@@ -40,6 +40,17 @@ export const TodoApp = () => {
     },
     { onSuccess: () => queryClient.invalidateQueries() }
   );
+  const toggleTodoMutation = useMutation(
+    "todo-toggle",
+    async (todo: TodoItem) => {
+      const response = await axios.put<true>(`/todos/${todo.id}`, {
+        ...todo,
+        done: !todo.done,
+      });
+      return response.data;
+    },
+    { onSuccess: () => queryClient.invalidateQueries() }
+  );
 
   const openTodos = todos.filter((todo) => todo.done === false);
   const {
@@ -58,8 +69,7 @@ export const TodoApp = () => {
   };
 
   const handleTodoClick = async (todo: TodoItem) => {
-    await axios.put(`/todos/${todo.id}`, { ...todo, done: !todo.done });
-    await refetchTodos();
+    await toggleTodoMutation.mutateAsync(todo);
   };
 
   return (
