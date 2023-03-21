@@ -14,7 +14,7 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 enum Priority {
@@ -37,27 +37,7 @@ interface TodoItem {
 }
 
 export const TodoApp = () => {
-  const [todos, setTodos] = useState<TodoItem[]>([
-    {
-      id: Math.random(),
-      title: "Buy groceries",
-      description: "Milk, Cheese,...",
-      priority: Priority.High,
-      done: false,
-    },
-    {
-      id: Math.random(),
-      title: "Clean up",
-      priority: Priority.Medium,
-      done: false,
-    },
-    {
-      id: Math.random(),
-      title: "Do nothing",
-      priority: Priority.Low,
-      done: true,
-    },
-  ]);
+  const [todos, setTodos] = useState<TodoItem[]>([]);
   const openTodos = todos.filter((todo) => todo.done === false);
   const {
     register,
@@ -68,6 +48,16 @@ export const TodoApp = () => {
   } = useForm<CreateFormState>({
     defaultValues: { priority: Priority.Medium },
   });
+
+  const fetchTodos = async () => {
+    const response = await fetch("http://localhost:4000/todos");
+    const data = await response.json();
+    setTodos(data);
+  };
+
+  useEffect(() => {
+    fetchTodos();
+  }, []);
 
   const handleCreateSubmit = async (data: CreateFormState) => {
     console.log(data);
