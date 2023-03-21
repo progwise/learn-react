@@ -1,5 +1,6 @@
 import { LowPriority, PriorityHigh } from "@mui/icons-material";
 import {
+  Box,
   Button,
   Checkbox,
   List,
@@ -74,74 +75,75 @@ export const TodoApp = () => {
 
   return (
     <>
-      <Paper>
-        <List>
-          {todos.map((todo) => {
-            return (
-              <ListItem
-                key={todo.id}
-                disablePadding
-                secondaryAction={
-                  {
-                    [Priority.High]: <PriorityHigh />,
-                    [Priority.Medium]: "",
-                    [Priority.Low]: <LowPriority />,
-                  }[todo.priority]
-                }
-              >
-                <ListItemButton>
-                  <ListItemIcon>
-                    <Checkbox />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={todo.title}
-                    secondary={todo.description}
-                  />
-                </ListItemButton>
-              </ListItem>
-            );
-          })}
-        </List>
-      </Paper>
+      <Box marginY={2}>
+        <Paper>
+          <List>
+            {todos.map((todo) => {
+              return (
+                <ListItem
+                  key={todo.id}
+                  disablePadding
+                  secondaryAction={
+                    {
+                      [Priority.High]: <PriorityHigh />,
+                      [Priority.Medium]: "",
+                      [Priority.Low]: <LowPriority />,
+                    }[todo.priority]
+                  }
+                >
+                  <ListItemButton>
+                    <ListItemIcon>
+                      <Checkbox />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={todo.title}
+                      secondary={todo.description}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              );
+            })}
+          </List>
+        </Paper>
+      </Box>
 
-      <br />
-      <form onSubmit={handleSubmit(handleCreateSubmit)}>
-        <TextField
-          {...register("title")}
-          label="Title"
-          disabled={isSubmitting}
-        />
-        <TextField
-          {...register("description")}
-          label="Description"
-          disabled={isSubmitting}
-        />
-
-        <Controller
-          render={({ field }) => (
-            <Select {...field} disabled={isSubmitting} label="Priority">
-              <MenuItem value={Priority.High}>high</MenuItem>
-              <MenuItem value={Priority.Medium}>medium</MenuItem>
-              <MenuItem value={Priority.Low}>low</MenuItem>
-            </Select>
-          )}
-          control={control}
-          name="priority"
-        />
-
-        <br />
-        <br />
-        <div>
-          <Button
-            type="submit"
-            variant="contained"
-            color="success"
+      <Box marginY={2}>
+        <form onSubmit={handleSubmit(handleCreateSubmit)}>
+          <TextField
+            {...register("title")}
+            label="Title"
             disabled={isSubmitting}
-          >
-            Create
-          </Button>
-        </div>
-      </form>
+          />
+          <TextField
+            {...register("description")}
+            label="Description"
+            disabled={isSubmitting}
+          />
+
+          <Controller
+            render={({ field }) => (
+              <Select {...field} disabled={isSubmitting} label="Priority">
+                <MenuItem value={Priority.High}>high</MenuItem>
+                <MenuItem value={Priority.Medium}>medium</MenuItem>
+                <MenuItem value={Priority.Low}>low</MenuItem>
+              </Select>
+            )}
+            control={control}
+            name="priority"
+          />
+
+          <Box marginY={2}>
+            <Button
+              type="submit"
+              variant="contained"
+              color="success"
+              disabled={isSubmitting}
+            >
+              Create
+            </Button>
+          </Box>
+        </form>
+      </Box>
     </>
   );
 };
