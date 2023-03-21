@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { axios } from "./axios";
 
 enum Priority {
   Low = "low",
@@ -50,9 +51,8 @@ export const TodoApp = () => {
   });
 
   const fetchTodos = async () => {
-    const response = await fetch("http://localhost:4000/todos");
-    const data = await response.json();
-    setTodos(data);
+    const response = await axios.get("/todos");
+    setTodos(response.data);
   };
 
   useEffect(() => {
@@ -60,21 +60,9 @@ export const TodoApp = () => {
   }, []);
 
   const handleCreateSubmit = async (data: CreateFormState) => {
-    console.log(data);
+    await axios.post("/todos", data);
+    await fetchTodos();
 
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    const newTodos = [
-      ...todos,
-      {
-        id: Math.random(),
-        title: data.title,
-        description: data.description,
-        priority: data.priority,
-        done: false,
-      },
-    ];
-
-    setTodos(newTodos);
     reset();
   };
 
