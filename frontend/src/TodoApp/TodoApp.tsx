@@ -1,4 +1,5 @@
-import { LowPriority, PriorityHigh } from "@mui/icons-material";
+import LowPriority from "@mui/icons-material/LowPriority";
+import PriorityHigh from "@mui/icons-material/PriorityHigh";
 import {
   Box,
   Button,
