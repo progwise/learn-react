@@ -38,7 +38,25 @@ export const TodoApp = () => {
       });
       return response.data;
     },
-    { onSuccess: () => queryClient.invalidateQueries() }
+    {
+      onMutate: async (newTodo) => {
+        const prevTodos = queryClient.getQueryData<TodoItem[]>("todos");
+        const optimisticTodo: TodoItem = {
+          ...newTodo,
+          done: false,
+          id: Math.random(),
+        };
+        queryClient.setQueryData<TodoItem[]>("todos", (prevTodos) => [
+          ...(prevTodos ?? []),
+          optimisticTodo,
+        ]);
+        return { prevTodos };
+      },
+      onError: (error, newTodo, context) => {
+        queryClient.setQueryData("todos", context?.prevTodos);
+      },
+      onSettled: () => queryClient.invalidateQueries(),
+    }
   );
   const toggleTodoMutation = useMutation(
     "todo-toggle",
@@ -69,7 +87,7 @@ export const TodoApp = () => {
   };
 
   const handleTodoClick = async (todo: TodoItem) => {
-    await toggleTodoMutation.mutateAsync(todo);
+    toggleTodoMutation.mutateAsync(todo);
   };
 
   return (
