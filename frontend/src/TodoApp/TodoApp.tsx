@@ -66,8 +66,9 @@ export const TodoApp = () => {
     reset();
   };
 
-  const handleTodoClick = (todo: TodoItem) => {
-    console.log("handle todo click", todo);
+  const handleTodoClick = async (todo: TodoItem) => {
+    await axios.put(`/todos/${todo.id}`, { ...todo, done: !todo.done });
+    await fetchTodos();
   };
 
   return (
