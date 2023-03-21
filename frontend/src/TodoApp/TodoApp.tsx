@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "react-query";
 import { axios } from "./axios";
 import { Priority, TodoItem, useTodo } from "./useTodo";
 
@@ -27,6 +28,18 @@ interface CreateFormState {
 
 export const TodoApp = () => {
   const [todos, refetchTodos] = useTodo();
+  const queryClient = useQueryClient();
+  const createTodoMutation = useMutation(
+    "todo-create",
+    async (data: CreateFormState) => {
+      const response = await axios.post<TodoItem>("/todos", {
+        ...data,
+        done: false,
+      });
+      return response.data;
+    },
+    { onSuccess: () => queryClient.invalidateQueries() }
+  );
 
   const openTodos = todos.filter((todo) => todo.done === false);
   const {
@@ -40,9 +53,7 @@ export const TodoApp = () => {
   });
 
   const handleCreateSubmit = async (data: CreateFormState) => {
-    await axios.post("/todos", { ...data, done: false });
-    await refetchTodos();
-
+    await createTodoMutation.mutateAsync(data);
     reset();
   };
 

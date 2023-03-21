@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import { axios } from "./axios";
 
 export enum Priority {
@@ -18,16 +19,15 @@ export interface TodoItem {
 type UseTodoReturn = [TodoItem[], () => Promise<void>];
 
 export const useTodo = (): UseTodoReturn => {
-  const [todos, setTodos] = useState<TodoItem[]>([]);
+  const { data, refetch } = useQuery("todos", async () => {
+    const response = await axios.get<TodoItem[]>("/todos");
+    return response.data;
+  });
 
-  const refetchTodos = async () => {
-    const response = await axios.get("/todos");
-    setTodos(response.data);
-  };
-
-  useEffect(() => {
-    refetchTodos();
-  }, []);
-
-  return [todos, refetchTodos];
+  return [
+    data ?? [],
+    async () => {
+      await refetch();
+    },
+  ];
 };
