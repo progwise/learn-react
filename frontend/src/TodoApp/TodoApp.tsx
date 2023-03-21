@@ -17,28 +17,17 @@ import {
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { axios } from "./axios";
+import { Priority, TodoItem, useTodo } from "./useTodo";
 
-enum Priority {
-  Low = "low",
-  Medium = "medium",
-  High = "high",
-}
 interface CreateFormState {
   title: string;
   description: string;
   priority: Priority;
 }
 
-interface TodoItem {
-  id: number;
-  title: string;
-  description?: string;
-  priority: Priority;
-  done: boolean;
-}
-
 export const TodoApp = () => {
-  const [todos, setTodos] = useState<TodoItem[]>([]);
+  const [todos, refetchTodos] = useTodo();
+
   const openTodos = todos.filter((todo) => todo.done === false);
   const {
     register,
@@ -50,25 +39,16 @@ export const TodoApp = () => {
     defaultValues: { priority: Priority.Medium },
   });
 
-  const fetchTodos = async () => {
-    const response = await axios.get("/todos");
-    setTodos(response.data);
-  };
-
-  useEffect(() => {
-    fetchTodos();
-  }, []);
-
   const handleCreateSubmit = async (data: CreateFormState) => {
     await axios.post("/todos", { ...data, done: false });
-    await fetchTodos();
+    await refetchTodos();
 
     reset();
   };
 
   const handleTodoClick = async (todo: TodoItem) => {
     await axios.put(`/todos/${todo.id}`, { ...todo, done: !todo.done });
-    await fetchTodos();
+    await refetchTodos();
   };
 
   return (

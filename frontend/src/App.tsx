@@ -3,11 +3,13 @@ import { AboutMe } from "./AboutMe";
 import "./App.css";
 import { Counter } from "./Counter";
 import { Greeting } from "./Greeting";
+import { useTodo } from "./TodoApp/useTodo";
 
 const COMPANY_NAME = "Cosmos Direct";
 
 const App = () => {
   const [hasGreetedBack, setHasGreetedBack] = useState(false);
+  const [todos] = useTodo();
 
   const handleGreet = () => setHasGreetedBack(true);
 
@@ -27,6 +29,7 @@ const App = () => {
         hobbies={["Sailing", "Coding"]}
       />
       <Counter steps={10} start={100} min={100} max={150} />
+      Number of Todos: {todos.length}
     </div>
   );
 };
