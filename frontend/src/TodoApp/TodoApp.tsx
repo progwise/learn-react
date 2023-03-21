@@ -58,6 +58,7 @@ export const TodoApp = () => {
       done: true,
     },
   ]);
+  const openTodos = todos.filter((todo) => todo.done === false);
   const {
     register,
     handleSubmit,
@@ -89,7 +90,9 @@ export const TodoApp = () => {
 
   return (
     <>
-      <h2>Todos (3/4)</h2>
+      <h2>
+        Todos ({openTodos.length}/{todos.length})
+      </h2>
       <Box marginY={2}>
         <Paper>
           <List>
