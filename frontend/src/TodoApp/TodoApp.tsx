@@ -60,7 +60,7 @@ export const TodoApp = () => {
   }, []);
 
   const handleCreateSubmit = async (data: CreateFormState) => {
-    await axios.post("/todos", data);
+    await axios.post("/todos", { ...data, done: false });
     await fetchTodos();
 
     reset();
