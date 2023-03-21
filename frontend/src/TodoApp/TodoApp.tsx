@@ -66,6 +66,10 @@ export const TodoApp = () => {
     reset();
   };
 
+  const handleTodoClick = (todo: TodoItem) => {
+    console.log("handle todo click", todo);
+  };
+
   return (
     <>
       <h2>
@@ -87,7 +91,7 @@ export const TodoApp = () => {
                     }[todo.priority]
                   }
                 >
-                  <ListItemButton>
+                  <ListItemButton onClick={() => handleTodoClick(todo)}>
                     <ListItemIcon>
                       <Checkbox checked={todo.done} />
                     </ListItemIcon>
