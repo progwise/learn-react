@@ -19,7 +19,7 @@ export const Counter = ({
 
   return (
     <div>
-      {value}
+      <span data-testid="counter-value">{value}</span>
 
       <CounterButtons
         onIncrement={() => {
