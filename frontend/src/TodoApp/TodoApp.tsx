@@ -32,6 +32,7 @@ interface TodoItem {
   title: string;
   description?: string;
   priority: Priority;
+  done: boolean;
 }
 
 export const TodoApp = () => {
@@ -41,9 +42,20 @@ export const TodoApp = () => {
       title: "Buy groceries",
       description: "Milk, Cheese,...",
       priority: Priority.High,
+      done: false,
     },
-    { id: Math.random(), title: "Clean up", priority: Priority.Medium },
-    { id: Math.random(), title: "Do nothing", priority: Priority.Low },
+    {
+      id: Math.random(),
+      title: "Clean up",
+      priority: Priority.Medium,
+      done: false,
+    },
+    {
+      id: Math.random(),
+      title: "Do nothing",
+      priority: Priority.Low,
+      done: true,
+    },
   ]);
   const {
     register,
@@ -66,6 +78,7 @@ export const TodoApp = () => {
         title: data.title,
         description: data.description,
         priority: data.priority,
+        done: false,
       },
     ];
 
@@ -75,6 +88,7 @@ export const TodoApp = () => {
 
   return (
     <>
+      <h2>Todos (3/4)</h2>
       <Box marginY={2}>
         <Paper>
           <List>
@@ -93,7 +107,7 @@ export const TodoApp = () => {
                 >
                   <ListItemButton>
                     <ListItemIcon>
-                      <Checkbox />
+                      <Checkbox checked={todo.done} />
                     </ListItemIcon>
                     <ListItemText
                       primary={todo.title}
