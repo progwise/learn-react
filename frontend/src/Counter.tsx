@@ -1,6 +1,10 @@
-import { useContext, useState } from "react";
+import styled from "@emotion/styled";
 import { CounterButtons } from "./CounterButtons";
 import { useCounter } from "./CounterContext";
+
+const StyledSpan = styled.span<{ value: number }>`
+  color: ${({ value }) => (value >= 120 ? "red" : "black")};
+`;
 
 interface CounterProps {
   steps?: number;
@@ -19,7 +23,9 @@ export const Counter = ({
 
   return (
     <div>
-      <span data-testid="counter-value">{value}</span>
+      <StyledSpan data-testid="counter-value" value={value}>
+        {value}
+      </StyledSpan>
 
       <CounterButtons
         onIncrement={() => dispatch({ type: "increment", steps })}
