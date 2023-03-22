@@ -33,6 +33,7 @@ export const TodoListItem = ({ todo }: TodoListItemProps) => {
     <ListItem
       key={todo.id}
       disablePadding
+      onClick={() => toggleTodoMutation.mutate(todo)}
       secondaryAction={
         {
           [Priority.High]: <PriorityHigh />,
@@ -41,7 +42,7 @@ export const TodoListItem = ({ todo }: TodoListItemProps) => {
         }[todo.priority]
       }
     >
-      <ListItemButton onClick={() => toggleTodoMutation.mutate(todo)}>
+      <ListItemButton>
         <ListItemIcon>
           <Checkbox checked={todo.done} />
         </ListItemIcon>
