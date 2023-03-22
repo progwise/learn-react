@@ -330,3 +330,38 @@ const [value, setValue] = useState(0);
 # Installation eines UI Packages
 
 https://mui.com/material-ui/getting-started/overview/
+
+---
+
+# Links Allgemein
+
+- React Docs: https://react.dev/
+- Vite: https://vitejs.dev/
+- React Hook Form: https://react-hook-form.com/
+- React Router: https://reactrouter.com/en/main
+
+---
+
+# Links Styling:
+
+- Material UI: https://mui.com/material-ui/getting-started/overview/
+- Emotion: https://emotion.sh/docs/introduction
+- Styled Components: https://styled-components.com/
+- TailwindCSS: https://tailwindcss.com/
+
+---
+
+# Links Data Fetching
+
+- React Query: https://react-query-v3.tanstack.com/
+- Axios: https://axios-http.com/docs/intro
+
+---
+
+# Links Testing
+
+- Jest: https://vitest.dev/
+- Vitest: https://vitest.dev/
+- Testing Library: https://testing-library.com/
+- Mock Service Worker: https://mswjs.io/
+- Playwright: https://playwright.dev/
