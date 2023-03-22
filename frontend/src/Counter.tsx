@@ -15,27 +15,15 @@ export const Counter = ({
   min = -Infinity,
   max = Infinity,
 }: CounterProps) => {
-  const { value, setValue } = useCounter();
+  const { value, dispatch } = useCounter();
 
   return (
     <div>
       <span data-testid="counter-value">{value}</span>
 
       <CounterButtons
-        onIncrement={() => {
-          const newValue = value + steps;
-
-          if (newValue <= max) {
-            setValue(value + steps);
-          }
-        }}
-        onDecrement={() => {
-          const newValue = value - steps;
-
-          if (newValue >= min) {
-            setValue(newValue);
-          }
-        }}
+        onIncrement={() => dispatch({ type: "increment", steps })}
+        onDecrement={() => dispatch({ type: "decrement", steps })}
       />
     </div>
   );

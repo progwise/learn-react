@@ -1,13 +1,20 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
+  useReducer,
+  useState,
+} from "react";
 
 interface CounterContext {
   value: number;
-  setValue: (newValue: number) => void;
+  dispatch: React.Dispatch<CounterAction>;
 }
 
 const CounterContext = createContext<CounterContext>({
   value: 0,
-  setValue: () => {},
+  dispatch: () => {},
 });
 
 interface CounterProviderProps {
@@ -17,24 +24,35 @@ interface CounterProviderProps {
   max: number;
 }
 
+interface CounterAction {
+  type: "increment" | "decrement";
+  steps: number;
+}
+
 export const CounterProvider = ({
   children,
   start,
   min,
   max,
 }: CounterProviderProps) => {
-  const [value, setValue] = useState(start);
+  const counterReducer = useCallback(
+    (state: number, action: CounterAction): number => {
+      const newState =
+        state + (action.type === "increment" ? action.steps : -action.steps);
 
-  const setValueWithValidation = (newValue: number) => {
-    if (newValue >= min && newValue <= max) {
-      setValue(newValue);
-    }
-  };
+      if (newState >= min && newState <= max) {
+        return newState;
+      }
+
+      return state;
+    },
+    [min, max]
+  );
+
+  const [value, dispatch] = useReducer(counterReducer, start);
 
   return (
-    <CounterContext.Provider
-      value={{ value, setValue: setValueWithValidation }}
-    >
+    <CounterContext.Provider value={{ value, dispatch }}>
       {children}
     </CounterContext.Provider>
   );
