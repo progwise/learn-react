@@ -1,4 +1,3 @@
-import { Button } from "@mui/material";
 import { ReactNode, useEffect, useState } from "react";
 
 interface GreetingProps {
@@ -35,7 +34,7 @@ export const Greeting = ({
       {hasGreetedBack === false && (
         <button onClick={onGreet}>Greet back</button>
       )}
-      <Button onClick={() => setThrowError(true)}>Throw an Error</Button>
+      <button onClick={() => setThrowError(true)}>Throw an Error</button>
       <hr />
     </div>
   );

@@ -6,7 +6,9 @@ import { Counter } from "./Counter";
 import { CounterProvider } from "./CounterContext";
 import { ErrorBoundary } from "./ErrorBoundary";
 import { Greeting } from "./Greeting";
-import { useTodo } from "./TodoApp/useTodo";
+import { ReduxCounter } from "./redux/ReduxCounter";
+import { useAddTodoMutation, useGetAllTodosQuery } from "./redux/todoApi";
+import { Priority, useTodo } from "./TodoApp/useTodo";
 
 const COMPANY_NAME = "Cosmos Direct";
 
@@ -20,7 +22,9 @@ const theme: Theme = {
 
 const App = () => {
   const [hasGreetedBack, setHasGreetedBack] = useState(false);
-  const [todos] = useTodo();
+  const { data } = useGetAllTodosQuery({});
+  const todos = data ?? [];
+  const [addTodo] = useAddTodoMutation();
 
   const handleGreet = () => setHasGreetedBack(true);
 
@@ -49,7 +53,20 @@ const App = () => {
           <Counter steps={10} />
         </CounterProvider>
         Number of Todos: {todos.length}
+        <button
+          onClick={() =>
+            addTodo({
+              id: -1,
+              done: false,
+              priority: Priority.Medium,
+              title: "new Todo",
+            })
+          }
+        >
+          Add Todo
+        </button>
       </CounterProvider>
+      <ReduxCounter />
     </ThemeProvider>
   );
 };
