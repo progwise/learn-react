@@ -3,6 +3,7 @@ import { AboutMe } from "./AboutMe";
 import "./App.css";
 import { Counter } from "./Counter";
 import { CounterProvider } from "./CounterContext";
+import { ErrorBoundary } from "./ErrorBoundary";
 import { Greeting } from "./Greeting";
 import { useTodo } from "./TodoApp/useTodo";
 
@@ -18,13 +19,15 @@ const App = () => {
     <>
       <CounterProvider start={100} min={100} max={150}>
         App
-        <Greeting
-          name="Cosmos Direct"
-          hasGreetedBack={hasGreetedBack}
-          onGreet={handleGreet}
-        >
-          <span>🎉</span>
-        </Greeting>
+        <ErrorBoundary fallback={<div>Error in Greeting</div>}>
+          <Greeting
+            name="Cosmos Direct"
+            hasGreetedBack={hasGreetedBack}
+            onGreet={handleGreet}
+          >
+            <span>🎉</span>
+          </Greeting>
+        </ErrorBoundary>
         <AboutMe
           name="Pascal"
           techStack={["TypeScript", "React"]}

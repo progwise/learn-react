@@ -1,4 +1,5 @@
-import { ReactNode, useEffect } from "react";
+import { Button } from "@mui/material";
+import { ReactNode, useEffect, useState } from "react";
 
 interface GreetingProps {
   name?: string;
@@ -14,11 +15,16 @@ export const Greeting = ({
   onGreet,
 }: GreetingProps) => {
   console.log("render");
+  const [throwError, setThrowError] = useState(false);
 
   useEffect(() => {
     console.log("Hello from use effect");
     document.title = hasGreetedBack ? "" : "Hello - please greet back";
   }, [hasGreetedBack]);
+
+  if (throwError) {
+    throw new Error("some error from Greeting");
+  }
 
   return (
     <div>
@@ -29,6 +35,7 @@ export const Greeting = ({
       {hasGreetedBack === false && (
         <button onClick={onGreet}>Greet back</button>
       )}
+      <Button onClick={() => setThrowError(true)}>Throw an Error</Button>
       <hr />
     </div>
   );
