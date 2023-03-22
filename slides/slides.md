@@ -214,6 +214,58 @@ export const Greeting = ({ name = "World" }: GreetingProps) => {
 
 ---
 
+# Props verwenden
+
+- Props werden ähnlich wie HTML Attribute geschrieben
+- Es gibt drei Schreibweisen:
+  1. Anführungszeichen
+  2. geschweiften Klammern
+  3. ohne Wert
+
+```tsx
+// 1 - als String:
+<Greeting propName="fixed string" />
+
+// 2 - als Object (string/number/boolean/array/Object/etc.):
+<Greeting propName={3} />
+<Greeting propName={variable} />
+
+// 3 - als true (boolean):
+<Greeting propName />
+```
+
+---
+
+# Children Props
+
+- Children Prop funktioniert wie jeder andere Prop
+- aber eigene Syntax
+- wird genutzt für Verschachtelungen
+
+---
+
+# Children Props
+
+```tsx
+interface ListProps {
+  children: ReactNode;
+}
+
+const List = (props: ListProps) => {
+  return <ul>{props.children}</ul>;
+};
+```
+
+```tsx
+<List>
+  <ListItem>Item 1</ListItem>
+  <ListItem>Item 2</ListItem>
+  <ListItem>Item 3</ListItem>
+</List>
+```
+
+---
+
 # Listen
 
 - Arrays können mit der `.map()` Method in HTML Tags umgewandelt werden
