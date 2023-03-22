@@ -10,18 +10,29 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import { Theme, ThemeProvider } from "@emotion/react";
 
 const queryClient = new QueryClient();
 
+const theme: Theme = {
+  fontSizes: {
+    normal: "15px",
+    small: "10px",
+    big: "20px",
+  },
+};
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/playground" element={<App />} />
-          <Route path="/" element={<TodoApp />} />
-        </Routes>
-      </BrowserRouter>
-    </QueryClientProvider>
+    <ThemeProvider theme={theme}>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/playground" element={<App />} />
+            <Route path="/" element={<TodoApp />} />
+          </Routes>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );
