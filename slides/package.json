@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "marp -s ."
+    "start": "marp -s .",
+    "pdf": "marp slides.md --pdf --allow-local-files",
+    "html": "marp slides.md"
   },
   "keywords": [],
   "author": "",
