@@ -182,6 +182,29 @@ https://react.dev/learn/writing-markup-with-jsx
 
 ---
 
+# JSX
+
+Mit JSX kann in JavaScript HTML Code geschrieben werden:
+
+```tsx
+return <div>Content of the div</div>;
+```
+
+---
+
+# JSX
+
+Um innerhalb HTML JavaScript zu verwenden werden geschweifte Klammern `{}` benutzt:
+
+```tsx
+return <span>Die Summe von 1 + 2 ist {1 + 2}</span>;
+// Ausgegeben wird "<span>Die Summe von 1 + 2 ist 3</span>"
+```
+
+In den geschweiften Klammern kann jedes JavaScript Statement geschrieben (auch JSX).
+
+---
+
 ![bg right fit 50%](./images/vite.png)
 
 # Action!
