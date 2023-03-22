@@ -291,6 +291,8 @@ const List = (props: ListProps) => {
 
 # Listen
 
+![bg brightness:0.2 blur:4px](https://unsplash.com/photos/HWTXldFPVKM/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8OXx8bGlzdHN8ZGV8MHx8fHwxNjc5NDY3MDA4&force=true&w=1920)
+
 - Arrays können mit der `.map()` Method in HTML Tags umgewandelt werden
 - jeder Eintrag **muss** einen eindeutigen Key haben (Performance)
 
@@ -306,7 +308,54 @@ const List = (props: ListProps) => {
 
 # Event Handling
 
+![bg brightness:0.2 blur](https://unsplash.com/photos/SIZ66vF4FKA/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjc5NDkyNTcz&force=true&w=1920)
+
+- Auf HTML Tags können Event Listener registriert werden
+- dazu werden Funktionen an diese übergeben
+
+```tsx
+<button onClick={() => console.log("someone clicked")}>Click me</button>
+```
+
+- die Funktionen werden inline oder als "richtige" Funktionen übergeben
+- der Funktionsname sollte mit `handle` beginnen
+
+```tsx
+const handleClick = () => console.log("someone clicked");
+
+return <button onClick={handleClick}>Click me</button>;
+```
+
 ---
+
+![bg brightness:0.2 blur](https://unsplash.com/photos/SIZ66vF4FKA/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjc5NDkyNTcz&force=true&w=1920)
+
+# Event Handling
+
+Es ist auch möglich in Komponenten eigene Listener als Props zu definieren:
+
+```tsx
+interface CounterButtonsProps {
+  onIncrement: () => void;
+  onDecrement: () => void;
+}
+
+export const CounterButtons = ({
+  onIncrement,
+  onDecrement,
+}: CounterButtonsProps) => {
+  return (
+    <div>
+      <button onClick={onIncrement}>Increment</button>
+      <button onClick={onDecrement}>Decrement</button>
+    </div>
+  );
+};
+```
+
+---
+
+![bg brightness:0.1 blur](https://unsplash.com/photos/lRoX0shwjUQ/download?force=true&w=1920)
 
 # State
 
