@@ -6,7 +6,7 @@ function App() {
   return (
     <div>
       App
-      <Greeting />
+      <Greeting name="BITBW" />
       <AboutMe />
     </div>
   );

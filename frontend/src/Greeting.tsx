@@ -1,5 +1,7 @@
-export const Greeting = () => {
-  // custom logic
+export interface GreetingProps {
+  name: string;
+}
 
-  return <h1>Hello World</h1>;
+export const Greeting = (props: GreetingProps) => {
+  return <h1>Hello {props.name}</h1>;
 };
