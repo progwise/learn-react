@@ -1,6 +1,7 @@
 import "./App.css";
 import { Greeting } from "./Greeting";
 import { AboutMe } from "./AboutMe";
+import { Counter } from "./Counter";
 
 function App() {
   const handleGreetBack = () => {
@@ -18,6 +19,7 @@ function App() {
           <li>React</li>
         </ul>
       </AboutMe>
+      <Counter start={10} min={0} max={20} />
     </div>
   );
 }
