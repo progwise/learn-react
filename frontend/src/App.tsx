@@ -7,7 +7,7 @@ function App() {
     <div>
       App
       <Greeting name="BITBW" />
-      <AboutMe />
+      <AboutMe name="Pascal" age={27} />
     </div>
   );
 }
