@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Button } from "@mui/material";
 
 export interface GreetingProps {
   names: string[];
@@ -49,9 +50,13 @@ export const Greeting = (props: GreetingProps) => {
       </ul>
 
       {showGreetingButton && (
-        <button onClick={handleClick} onMouseEnter={handleMouseEnter}>
+        <Button
+          variant="outlined"
+          onClick={handleClick}
+          onMouseEnter={handleMouseEnter}
+        >
           Greet back
-        </button>
+        </Button>
       )}
       {false}
       {undefined}
