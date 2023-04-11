@@ -1,7 +1,16 @@
 export interface GreetingProps {
-  name: string;
+  names: string[];
 }
 
 export const Greeting = (props: GreetingProps) => {
-  return <h1>Hello {props.name}</h1>;
+  return (
+    <div>
+      <h1>Hello to:</h1>
+      <ul>
+        {props.names.map((name) => {
+          return <li key={name}>{name}</li>;
+        })}
+      </ul>
+    </div>
+  );
 };

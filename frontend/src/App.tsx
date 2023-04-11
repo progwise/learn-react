@@ -6,7 +6,7 @@ function App() {
   return (
     <div>
       App
-      <Greeting name="BITBW" />
+      <Greeting names={["BITBW", "World"]} />
       <AboutMe name="Pascal" age={27}>
         Code-Stack:
         <ul>
