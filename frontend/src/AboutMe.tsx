@@ -1,6 +1,7 @@
 interface AboutMeProps {
   name: string;
   age: number;
+  children: React.ReactNode;
 }
 
 export const AboutMe = (props: AboutMeProps) => {
@@ -14,6 +15,7 @@ export const AboutMe = (props: AboutMeProps) => {
         <li>Sailing</li>
         <li>Coding</li>
       </ul>
+      {props.children}
     </div>
   );
 };

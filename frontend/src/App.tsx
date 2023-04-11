@@ -7,7 +7,13 @@ function App() {
     <div>
       App
       <Greeting name="BITBW" />
-      <AboutMe name="Pascal" age={27} />
+      <AboutMe name="Pascal" age={27}>
+        Code-Stack:
+        <ul>
+          <li>TypeScript</li>
+          <li>React</li>
+        </ul>
+      </AboutMe>
     </div>
   );
 }
