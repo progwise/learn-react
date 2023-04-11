@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export interface GreetingProps {
   names: string[];
@@ -7,8 +7,26 @@ export interface GreetingProps {
 
 export const Greeting = (props: GreetingProps) => {
   const [hasGreetedBack, setHasGreetedBack] = useState(false);
+  const [blink, setBlink] = useState(false);
 
-  console.log("hasGreetedBack", hasGreetedBack);
+  useEffect(() => {
+    if (hasGreetedBack) {
+      document.title = "";
+    } else {
+      document.title = "HELLO!!!";
+    }
+  }, [hasGreetedBack]);
+
+  useEffect(() => {
+    const interval = setInterval(
+      () => setBlink((currentBlink) => !currentBlink),
+      1000
+    );
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   const handleClick = () => {
     props.onGreetBack();
@@ -39,7 +57,9 @@ export const Greeting = (props: GreetingProps) => {
       {undefined}
       {null}
       {true}
-      {hasGreetedBack ? "Has greeted back" : "has not greeted back"}
+      <span style={{ backgroundColor: blink ? "yellow" : "white" }}>
+        {hasGreetedBack ? "Has greeted back" : "has not greeted back"}
+      </span>
     </div>
   );
 };
