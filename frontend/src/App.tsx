@@ -7,7 +7,7 @@ function App() {
     <div>
       App
       <Greeting names={["BITBW", "World"]} />
-      <AboutMe name="Pascal" age={27}>
+      <AboutMe name="Pascal" age={27} hobbies={["Sailing", "Coding"]}>
         Code-Stack:
         <ul>
           <li>TypeScript</li>

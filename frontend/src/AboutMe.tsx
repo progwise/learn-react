@@ -2,6 +2,7 @@ interface AboutMeProps {
   name: string;
   age: number;
   children: React.ReactNode;
+  hobbies: string[];
 }
 
 export const AboutMe = (props: AboutMeProps) => {
@@ -12,8 +13,9 @@ export const AboutMe = (props: AboutMeProps) => {
       </h2>
       Hobbies:
       <ul>
-        <li>Sailing</li>
-        <li>Coding</li>
+        {props.hobbies.map((hobby) => {
+          return <li key={hobby}>{hobby}</li>;
+        })}
       </ul>
       {props.children}
     </div>
