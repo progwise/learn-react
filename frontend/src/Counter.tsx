@@ -1,3 +1,5 @@
+import { Add, Remove } from "@mui/icons-material";
+import { Button } from "@mui/material";
 import { useState } from "react";
 
 interface CounterProps {
@@ -21,12 +23,20 @@ export const Counter = (props: CounterProps) => {
   return (
     <div>
       Aktueller Wert: {count}
-      <button onClick={handleIncreaseClick} disabled={count >= props.max}>
-        +
-      </button>
-      <button onClick={handleDecreaseClick} disabled={count <= props.min}>
-        -
-      </button>
+      <Button
+        variant="outlined"
+        onClick={handleIncreaseClick}
+        disabled={count >= props.max}
+      >
+        <Add />
+      </Button>
+      <Button
+        variant="outlined"
+        onClick={handleDecreaseClick}
+        disabled={count <= props.min}
+      >
+        <Remove />
+      </Button>
     </div>
   );
 };
