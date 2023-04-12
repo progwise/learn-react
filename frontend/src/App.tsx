@@ -9,7 +9,7 @@ function App() {
   };
 
   return (
-    <div>
+    <>
       App
       <Greeting names={["BITBW", "World"]} onGreetBack={handleGreetBack} />
       <AboutMe name="Pascal" age={27} hobbies={["Sailing", "Coding"]}>
@@ -20,7 +20,7 @@ function App() {
         </ul>
       </AboutMe>
       <Counter start={10} min={0} max={20} />
-    </div>
+    </>
   );
 }
 
