@@ -32,8 +32,9 @@ export const TodoApp = () => {
   } = useForm<TodoItem>({ resolver: zodResolver(CreateTodoSchema) });
 
   const handleCreateSubmit = async (data: TodoItem) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log(data);
+    const newTodos = [...todos, data];
+    setTodos(newTodos);
+
     reset();
   };
 
