@@ -9,7 +9,7 @@ enum Priority {
   LOW = "low",
 }
 
-interface CreateTodoForm {
+interface TodoItem {
   title: string;
   priority: Priority;
 }
@@ -20,14 +20,18 @@ const CreateTodoSchema = z.object({
 });
 
 export const TodoApp = () => {
+  const [todos, setTodos] = useState<TodoItem[]>([
+    { title: "Buy groceries", priority: Priority.MEDIUM },
+  ]);
+
   const {
     handleSubmit,
     register,
     reset,
     formState: { isSubmitting, errors },
-  } = useForm<CreateTodoForm>({ resolver: zodResolver(CreateTodoSchema) });
+  } = useForm<TodoItem>({ resolver: zodResolver(CreateTodoSchema) });
 
-  const handleCreateSubmit = async (data: CreateTodoForm) => {
+  const handleCreateSubmit = async (data: TodoItem) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     console.log(data);
     reset();
@@ -36,6 +40,13 @@ export const TodoApp = () => {
   return (
     <>
       <h1>Todo App</h1>
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.title}>
+            <input type="checkbox" /> {todo.title} ({todo.priority})
+          </li>
+        ))}
+      </ul>
       <form onSubmit={handleSubmit(handleCreateSubmit)}>
         <input
           {...register("title", { minLength: 1, maxLength: 100 })}
