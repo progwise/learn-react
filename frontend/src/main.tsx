@@ -8,6 +8,7 @@ import { TodoApp } from "./TodoApp";
 import { UserContextProvider } from "./UserContext";
 import { UserMenu } from "./UserMenu";
 import { CounterContextProvider } from "./CounterContext";
+import { DemoForm } from "./DemoForm";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -18,6 +19,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
             <Link to="/">Todo App</Link>
             <Link to="/playground">Playground</Link>
             <Link to="/counter">Counter</Link>
+            <Link to="/demo-form">DemoForm</Link>
             <UserMenu />
           </div>
           <Routes>
@@ -27,6 +29,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
               path="/counter"
               element={<Counter start={0} min={0} max={10} />}
             />
+            <Route path="/demo-form" element={<DemoForm />} />
           </Routes>
         </BrowserRouter>
       </CounterContextProvider>
