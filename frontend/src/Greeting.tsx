@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@mui/material";
+import { useBlink } from "./useBlink";
 
 export interface GreetingProps {
   names: string[];
@@ -8,7 +9,7 @@ export interface GreetingProps {
 
 export const Greeting = (props: GreetingProps) => {
   const [hasGreetedBack, setHasGreetedBack] = useState(false);
-  const [blink, setBlink] = useState(false);
+  const blink = useBlink({ duration: 1500, startValue: true });
 
   useEffect(() => {
     if (hasGreetedBack) {
@@ -17,17 +18,6 @@ export const Greeting = (props: GreetingProps) => {
       document.title = "HELLO!!!";
     }
   }, [hasGreetedBack]);
-
-  useEffect(() => {
-    const interval = setInterval(
-      () => setBlink((currentBlink) => !currentBlink),
-      1000
-    );
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
 
   const handleClick = () => {
     props.onGreetBack();
