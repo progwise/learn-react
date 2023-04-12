@@ -426,6 +426,31 @@ const [value, setValue] = useState(0);
 
 ---
 
+# Eigene Hooks
+
+- Funktionen, die mit dem Prefix `use` beginnen
+- können intern andere Hooks aufrufen
+- geben kein JSX zurück
+
+```ts
+export const useBlink = (): boolean => {
+  const [blink, setBlink] = useState();
+
+  useEffect(() => {
+    const interval = setInterval(
+      () => setBlink((currentBlink) => !currentBlink),
+      1000
+    );
+
+    return () => clearInterval(interval) };
+  }, []);
+
+  return blink;
+};
+```
+
+---
+
 # Installation eines UI Packages
 
 https://mui.com/material-ui/getting-started/overview/
