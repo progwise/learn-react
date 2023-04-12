@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { Button } from "@mui/material";
 import { useBlink } from "./useBlink";
+import { AboutMe } from "./AboutMe";
 
 export interface GreetingProps {
   names: string[];
@@ -24,11 +25,17 @@ export const Greeting = (props: GreetingProps) => {
     setHasGreetedBack(true);
   };
 
-  const handleMouseEnter = () => {
-    console.log("button was entered");
-  };
+  const handleMouseEnter = useCallback(() => {
+    console.log("button was entered ");
+  }, []);
 
   const showGreetingButton = !hasGreetedBack;
+
+  const hobbies = useMemo(() => ["Coding", "React"], []);
+  const numberOfHobbies = useMemo(() => {
+    console.log("calculate number of hobbies");
+    return hobbies.length;
+  }, [hobbies]);
 
   return (
     <div>
@@ -55,6 +62,9 @@ export const Greeting = (props: GreetingProps) => {
       <span style={{ backgroundColor: blink ? "yellow" : "white" }}>
         {hasGreetedBack ? "Has greeted back" : "has not greeted back"}
       </span>
+      <AboutMe name="Pascal" age={27} hobbies={hobbies}>
+        ...
+      </AboutMe>
     </div>
   );
 };

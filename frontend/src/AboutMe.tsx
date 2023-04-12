@@ -1,3 +1,5 @@
+import React from "react";
+
 interface AboutMeProps {
   name: string;
   age: number;
@@ -5,19 +7,29 @@ interface AboutMeProps {
   hobbies: string[];
 }
 
-export const AboutMe = (props: AboutMeProps) => {
-  return (
-    <div>
-      <h2>
-        Hello, I'm {props.name} and I am {props.age} year old.
-      </h2>
-      Hobbies:
-      <ul>
-        {props.hobbies.map((hobby) => {
-          return <li key={hobby}>{hobby}</li>;
-        })}
-      </ul>
-      {props.children}
-    </div>
-  );
-};
+export const AboutMe = React.memo(
+  (props: AboutMeProps) => {
+    console.log("About me was rendered");
+
+    return (
+      <div>
+        <h2>
+          Hello, I'm {props.name} and I am {props.age} year old.
+        </h2>
+        Hobbies:
+        <ul>
+          {props.hobbies.map((hobby) => {
+            return <li key={hobby}>{hobby}</li>;
+          })}
+        </ul>
+        {props.children}
+      </div>
+    );
+  }
+  // (prevProps, nextProps) => {
+  //   const propsAreEqual =
+  //     JSON.stringify(prevProps) === JSON.stringify(nextProps);
+
+  //   return propsAreEqual;
+  // }
+);
