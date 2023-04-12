@@ -355,6 +355,56 @@ export const CounterButtons = ({
 
 ---
 
+# Conditional Rendering
+
+## `if` Statement
+
+```tsx
+const UserPage = (props) => {
+  if (props.loading) {
+    return <Spinner />;
+  }
+
+  return <UserView />;
+};
+```
+
+---
+
+# Conditional Rendering
+
+## Ternärer Operator
+
+für Bedingungen innerhalb eines `return` Statements
+
+```tsx
+return (
+  <div>
+    <h1>User Page</h1>
+    {props.loading ? <Spinner /> : <UserView />}
+  </div>
+);
+```
+
+---
+
+# Conditional Rendering
+
+## `&&` - Operator
+
+Ebenfalls für Bedingungen innerhalb eines `return` Statements
+
+```tsx
+return (
+  <div>
+    <h1>User Page</h1>
+    {props.loading && <Spinner />}
+  </div>
+);
+```
+
+---
+
 ![bg brightness:0.1 blur](https://unsplash.com/photos/lRoX0shwjUQ/download?force=true&w=1920)
 
 # State
