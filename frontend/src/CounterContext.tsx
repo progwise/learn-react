@@ -1,4 +1,5 @@
 import { ReactNode, createContext, useContext, useState } from "react";
+import { useCounterState } from "./useCounterState";
 
 /**
  * Dieses Interface beschreibt, wie die Werte im Context aussehen
@@ -37,19 +38,10 @@ interface CounterContextProviderProps {
  * Dieser sollte möglichst weit oben im Tree verwendet werden.
  */
 export const CounterContextProvider = (props: CounterContextProviderProps) => {
-  const [count, setCount] = useState(props.start ?? 0);
-
-  const increment = () => {
-    setCount(count + 1);
-    // setCount((prevCount) => prevCount + 1);
-  };
-
-  const decrement = () => {
-    setCount(count - 1);
-  };
+  const [value, increment, decrement] = useCounterState({ start: props.start });
 
   return (
-    <CounterContext.Provider value={{ value: count, increment, decrement }}>
+    <CounterContext.Provider value={{ value, increment, decrement }}>
       {props.children}
     </CounterContext.Provider>
   );

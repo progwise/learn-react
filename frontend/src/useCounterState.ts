@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-interface UseCounterOptions {
+interface UseCounterStateOptions {
   start?: number;
 }
 
-export const useCounter = (
-  options?: UseCounterOptions
+export const useCounterState = (
+  options?: UseCounterStateOptions
 ): [number, () => void, () => void] => {
   const [count, setCount] = useState(options?.start ?? 0);
 
