@@ -1,6 +1,6 @@
 import { Add, Remove } from "@mui/icons-material";
 import { Button } from "@mui/material";
-import { useCounter } from "./useCounter";
+import { useCounter } from "./CounterContext";
 
 interface CounterProps {
   start: number;
@@ -9,22 +9,22 @@ interface CounterProps {
 }
 
 export const Counter = (props: CounterProps) => {
-  const [count, increment, decrement] = useCounter({ start: props.start });
+  const { value, increment, decrement } = useCounter();
 
   return (
     <div>
-      Aktueller Wert: {count}
+      Aktueller Wert: {value}
       <Button
         variant="outlined"
         onClick={increment}
-        disabled={count >= props.max}
+        disabled={value >= props.max}
       >
         <Add />
       </Button>
       <Button
         variant="outlined"
         onClick={decrement}
-        disabled={count <= props.min}
+        disabled={value <= props.min}
       >
         <Remove />
       </Button>

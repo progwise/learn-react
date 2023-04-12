@@ -20,6 +20,8 @@ function App() {
         </ul>
       </AboutMe>
       <Counter start={10} min={0} max={20} />
+      <Counter start={10} min={0} max={20} />
+      <Counter start={10} min={0} max={20} />
     </>
   );
 }
