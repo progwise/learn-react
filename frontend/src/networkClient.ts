@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const networkClient = axios.create({
-  baseURL: "http://localhost:4000/todos",
+  baseURL: "/api/todos",
   headers: {
     Authorization: "Bearer abc",
   },

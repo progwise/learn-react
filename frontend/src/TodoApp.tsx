@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { networkClient } from "./networkClient";
 
-enum Priority {
+export enum Priority {
   HIGH = "high",
   MEDIUM = "medium",
   LOW = "low",
@@ -58,8 +58,6 @@ export const TodoApp = () => {
     },
   });
 
-  console.log({ data, isLoading });
-
   const {
     handleSubmit,
     register,
@@ -80,13 +78,14 @@ export const TodoApp = () => {
   return (
     <>
       <h1>Todo App</h1>
+      {error && <span>Can not load todos</span>}
       <ul>
         {data?.map((todo) => (
           <li key={todo.title}>
             <input
               type="checkbox"
               checked={todo.done}
-              onClick={() => {
+              onChange={() => {
                 handleToggleDoneClick(todo);
               }}
             />{" "}
