@@ -16,7 +16,7 @@ export const todos: TodoItem[] = [
     id: "1",
     title: "Dish washing",
     priority: Priority.MEDIUM,
-    done: false,
+    done: true,
   },
   {
     id: "2",

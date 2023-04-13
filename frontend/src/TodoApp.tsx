@@ -57,7 +57,7 @@ export const TodoApp = () => {
   } = useForm<TodoItem>({ resolver: zodResolver(CreateTodoSchema) });
 
   const handleCreateSubmit = async (data: TodoItem) => {
-    await createTodoMutation.mutateAsync(data);
+    await createTodoMutation.mutateAsync({ ...data, done: false });
     reset();
   };
 
@@ -67,7 +67,8 @@ export const TodoApp = () => {
       <ul>
         {data?.map((todo) => (
           <li key={todo.title}>
-            <input type="checkbox" /> {todo.title} ({todo.priority})
+            <input type="checkbox" checked={todo.done} /> {todo.title} (
+            {todo.priority})
           </li>
         ))}
       </ul>
