@@ -1,4 +1,5 @@
-import { Add, Remove } from "@mui/icons-material";
+import Add from "@mui/icons-material/Add";
+import Remove from "@mui/icons-material/Remove";
 import { Button } from "@mui/material";
 import { useCounter } from "./CounterContext";
 
