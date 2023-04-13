@@ -33,6 +33,11 @@ const createTodos = async (data: TodoItem) => {
   return response.data;
 };
 
+const updateTodo = async (data: TodoItem) => {
+  const response = await networkClient.put<TodoItem>(`/${data.id}`, data);
+  return response.data;
+};
+
 export const TodoApp = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["todos"],
@@ -42,6 +47,12 @@ export const TodoApp = () => {
   const createTodoMutation = useMutation({
     mutationKey: ["createTodo"],
     mutationFn: createTodos,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["todos"]);
+    },
+  });
+  const updateTodoMutation = useMutation({
+    mutationFn: updateTodo,
     onSuccess: () => {
       queryClient.invalidateQueries(["todos"]);
     },
@@ -61,14 +72,25 @@ export const TodoApp = () => {
     reset();
   };
 
+  const handleToggleDoneClick = (todoItem: TodoItem) => {
+    const updatedTodoItem = { ...todoItem, done: !todoItem.done };
+    updateTodoMutation.mutate(updatedTodoItem);
+  };
+
   return (
     <>
       <h1>Todo App</h1>
       <ul>
         {data?.map((todo) => (
           <li key={todo.title}>
-            <input type="checkbox" checked={todo.done} /> {todo.title} (
-            {todo.priority})
+            <input
+              type="checkbox"
+              checked={todo.done}
+              onClick={() => {
+                handleToggleDoneClick(todo);
+              }}
+            />{" "}
+            {todo.title} ({todo.priority})
           </li>
         ))}
       </ul>
