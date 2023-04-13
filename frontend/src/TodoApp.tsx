@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { networkClient } from "./networkClient";
 
 enum Priority {
   HIGH = "high",
@@ -9,9 +11,11 @@ enum Priority {
   LOW = "low",
 }
 
-interface TodoItem {
+export interface TodoItem {
+  id: string;
   title: string;
   priority: Priority;
+  done: boolean;
 }
 
 const CreateTodoSchema = z.object({
@@ -19,10 +23,31 @@ const CreateTodoSchema = z.object({
   priority: z.nativeEnum(Priority),
 });
 
+const loadTodos = async () => {
+  const response = await networkClient.get<TodoItem[]>("/");
+  return response.data;
+};
+
+const createTodos = async (data: TodoItem) => {
+  const response = await networkClient.post<TodoItem>("/", data);
+  return response.data;
+};
+
 export const TodoApp = () => {
-  const [todos, setTodos] = useState<TodoItem[]>([
-    { title: "Buy groceries", priority: Priority.MEDIUM },
-  ]);
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["todos"],
+    queryFn: loadTodos,
+  });
+  const queryClient = useQueryClient();
+  const createTodoMutation = useMutation({
+    mutationKey: ["createTodo"],
+    mutationFn: createTodos,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["todos"]);
+    },
+  });
+
+  console.log({ data, isLoading });
 
   const {
     handleSubmit,
@@ -32,9 +57,7 @@ export const TodoApp = () => {
   } = useForm<TodoItem>({ resolver: zodResolver(CreateTodoSchema) });
 
   const handleCreateSubmit = async (data: TodoItem) => {
-    const newTodos = [...todos, data];
-    setTodos(newTodos);
-
+    await createTodoMutation.mutateAsync(data);
     reset();
   };
 
@@ -42,7 +65,7 @@ export const TodoApp = () => {
     <>
       <h1>Todo App</h1>
       <ul>
-        {todos.map((todo) => (
+        {data?.map((todo) => (
           <li key={todo.title}>
             <input type="checkbox" /> {todo.title} ({todo.priority})
           </li>
