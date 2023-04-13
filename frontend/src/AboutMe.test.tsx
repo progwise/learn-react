@@ -1,3 +1,5 @@
+import { AboutMe } from "./AboutMe";
+
 describe("AboutMe", () => {
   test("1 + 2 should be 3", () => {
     const result = 1 + 2;
