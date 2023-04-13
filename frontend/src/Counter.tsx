@@ -13,11 +13,12 @@ export const Counter = (props: CounterProps) => {
 
   return (
     <div>
-      Aktueller Wert: {value}
+      Aktueller Wert: <span data-testid="counter-value">{value}</span>
       <Button
         variant="outlined"
         onClick={increment}
         disabled={value >= props.max}
+        data-testid="increment-button"
       >
         <Add />
       </Button>
@@ -25,6 +26,7 @@ export const Counter = (props: CounterProps) => {
         variant="outlined"
         onClick={decrement}
         disabled={value <= props.min}
+        data-testid="decrement-button"
       >
         <Remove />
       </Button>

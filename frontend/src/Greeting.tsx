@@ -52,7 +52,7 @@ export const Greeting = (props: GreetingProps) => {
           onClick={handleClick}
           onMouseEnter={handleMouseEnter}
         >
-          Greet back
+          Greet Back
         </Button>
       )}
       {false}
