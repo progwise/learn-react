@@ -14,7 +14,7 @@ export const AboutMe = React.memo(
     return (
       <div>
         <h2>
-          Hello, I'm {props.name} and I am {props.age} year old.
+          Hello, I'm {props.name} and I am {props.age} years old.
         </h2>
         Hobbies:
         <ul>
