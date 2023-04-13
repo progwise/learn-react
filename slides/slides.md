@@ -426,6 +426,30 @@ const [value, setValue] = useState(0);
 
 ---
 
+# Fragments
+
+Mit Fragments werden Elemente gruppiert, ohne ein HTML Tag im DOM zu rendern:
+
+```tsx
+return (
+  <React.Fragment>
+    <h1>App</h1>
+    <ul>...</ul>
+  <React.Fragment>
+)
+```
+
+Alternative Schreibweise:
+
+```tsx
+<>
+  <h1>App</h1>
+  <ul>...</ul>
+</>
+```
+
+---
+
 # Eigene Hooks
 
 - Funktionen, die mit dem Prefix `use` beginnen
