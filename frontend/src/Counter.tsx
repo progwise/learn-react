@@ -14,7 +14,10 @@ export const Counter = (props: CounterProps) => {
 
   return (
     <div>
-      Aktueller Wert: <span data-testid="counter-value">{value}</span>
+      Aktueller Wert:{" "}
+      <span data-testid="counter-value" className="counter-value">
+        {value}
+      </span>
       <Button
         variant="outlined"
         onClick={increment}

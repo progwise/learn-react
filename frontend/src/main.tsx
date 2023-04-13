@@ -20,7 +20,16 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <CounterContextProvider start={10}>
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
-            <div style={{ display: "flex", gap: "8px" }}>
+            <div
+              style={{
+                display: "flex",
+                gap: "8px",
+                backgroundColor: "#ddd",
+                padding: "8px",
+                borderRadius: "16px",
+                flexWrap: "wrap",
+              }}
+            >
               <Link to="/">Todo App</Link>
               <Link to="/playground">Playground</Link>
               <Link to="/counter">Counter</Link>
